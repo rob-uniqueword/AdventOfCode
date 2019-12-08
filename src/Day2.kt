@@ -1,9 +1,47 @@
+import input.readInputFileAsIntcode
+import utilities.UnknownOpcodeException
 import utilities.processIntcode
 
 fun day2()
 {
-    println( processIntcode( "1,0,0,0,99".split(",").map { i -> i.toInt() } ) )
-    println( processIntcode( "2,3,0,3,99".split(",").map { i -> i.toInt() } ) )
-    println( processIntcode( "2,4,4,5,99,0".split(",").map { i -> i.toInt() } ) )
-    println( processIntcode( "1,1,1,4,99,5,6,0,99".split(",").map { i -> i.toInt() } ) )
+    val inputIntcode = readInputFileAsIntcode( "day2_input.txt" )
+    doPart1( inputIntcode )
+    doPart2( inputIntcode )
+}
+
+private fun doPart1( inputIntcode:List<Int> )
+{
+    val intCode = inputIntcode.toMutableList()
+    intCode[1] = 12
+    intCode[2] = 2
+    println( processIntcode( intCode ) )
+}
+
+private fun doPart2( inputIntcode: List<Int> )
+{
+    val intcode = inputIntcode.toMutableList()
+
+    for ( noun in inputIntcode.indices )
+    {
+        for ( verb in inputIntcode.indices )
+        {
+            try
+            {
+                intcode[1] = noun
+                intcode[2] = verb
+                val processed = processIntcode( intcode )
+                if ( processed[0] == 19690720 )
+                {
+                    println( noun )
+                    println( verb )
+                    println( 100 * noun + verb )
+                    return
+                }
+            }
+            catch ( e:UnknownOpcodeException )
+            {
+                // do nothing
+            }
+        }
+    }
 }

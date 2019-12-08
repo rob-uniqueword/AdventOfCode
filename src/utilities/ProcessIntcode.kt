@@ -7,15 +7,15 @@ fun processIntcode( intcode:List<Int> ) : List<Int>
 
     while ( true )
     {
-        val opcode = code[ curr ]
-
-        when ( opcode ) {
+        when ( code[ curr ] ) {
             1 -> code[ code[ curr + 3 ] ] = code[ code[ curr + 1 ] ] + code[ code [ curr + 2 ] ]
             2 -> code[ code[ curr + 3 ] ] = code[ code[ curr + 1 ] ] * code[ code [ curr + 2 ] ]
             99 -> return code
-            else -> { throw Exception( "Encountered unexpected opcode $opcode" ) }
+            else -> { throw UnknownOpcodeException( "Encountered unexpected opcode ${code[ curr ]}" ) }
         }
 
         curr += 4
     }
 }
+
+class UnknownOpcodeException( message:String ) : Exception( message )
