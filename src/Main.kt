@@ -1,5 +1,2 @@
-package adventOfCode
 
-fun main() {
-    println("Hello World!");
-}
+fun main() = day1()
