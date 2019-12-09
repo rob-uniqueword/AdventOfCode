@@ -8,8 +8,12 @@ internal class ValidateCodeKtTest {
 
     @Test
     fun isValidCodeTest() {
-        assertTrue( isValidCode( "111111" ) )
+        assertFalse( isValidCode( "111111" ) )
         assertFalse( isValidCode( "223450" ) )
         assertFalse( isValidCode( "123789" ) )
+        assertFalse( isValidCode( "123444" ) )
+
+        assertTrue( isValidCode( "112233" ) )
+        assertTrue( isValidCode( "111122" ) )
     }
 }
