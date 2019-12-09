@@ -2,10 +2,11 @@ package utilities
 
 import java.awt.Point
 
-fun calculateWirePoints( wirePath:List<Pair<Char,Int>> ) : Set<Point>
+fun calculateWirePoints( wirePath:List<Pair<Char,Int>> ) : Map<Point,Int>
 {
-    val points = mutableSetOf<Point>()
+    val points = mutableMapOf<Point,Int>()
     val point = Point( 0, 0 )
+    var length = 0
 
     for ( instruction:Pair<Char,Int> in wirePath )
     {
@@ -19,7 +20,7 @@ fun calculateWirePoints( wirePath:List<Pair<Char,Int>> ) : Set<Point>
                 'D' -> point.y--
             }
 
-            points.add( point.copy() )
+            points.putIfAbsent( point.copy(), ++length )
         }
     }
 
