@@ -7,5 +7,5 @@ fun day5() {
     computer.process()
 }
 
-private fun input() = 1
+private fun input() = 5
 private fun output( out:Int ) = print( "$out, ")

@@ -5,10 +5,33 @@ class IntcodeComputer( intcode:List<Int>, input:() -> Int, output:(Int) -> Unit)
     private val input = intcode
 
     private val operations:Map<Int,Operation> = mapOf(
-        Pair( 1, Operation( 2, 1 ) { code:MutableList<Int>, params:List<Int> -> code[ params[2] ] = params[0] + params[1] } ),
-        Pair( 2, Operation( 2, 1 ) { code:MutableList<Int>, params:List<Int> -> code[ params[2] ] = params[0] * params[1] } ),
-        Pair( 3, Operation( 0, 1 ) { code:MutableList<Int>, params:List<Int> -> code[ params[0] ] = input() } ),
-        Pair( 4, Operation( 1, 0 ) { _:MutableList<Int>, params:List<Int> -> output( params[0] ) } )
+        Pair( 1, Operation( 2, 1 ) { code:MutableList<Int>, params:List<Int> ->
+            run { code[params[2]] = params[0] + params[1]; return@Operation null }
+        }),
+        Pair( 2, Operation( 2, 1 ) { code:MutableList<Int>, params:List<Int> ->
+            run { code[ params[2] ] = params[0] * params[1]; return@Operation null }
+        }),
+        Pair( 3, Operation( 0, 1 ) { code:MutableList<Int>, params:List<Int> ->
+            run { code[ params[0] ] = input(); return@Operation null }
+        }),
+        Pair( 4, Operation( 1, 0 ) { _:MutableList<Int>, params:List<Int> ->
+            run { output( params[0] ); return@Operation null }
+        }),
+        Pair( 5, Operation( 2, 0 ) { _:MutableList<Int>, params:List<Int> ->
+            run { return@Operation if ( params[0] != 0 ) params[1] else null }
+        }),
+        Pair( 6, Operation( 2, 0 ) { _:MutableList<Int>, params:List<Int> ->
+            run { return@Operation if ( params[0] == 0 ) params[1] else null }
+        }),
+        Pair( 7, Operation( 2, 1 ) { code:MutableList<Int>, params:List<Int> ->
+            run { code[ params[2] ] = if ( params[0] < params[1] ) 1 else 0; return@Operation null }
+        }),
+        Pair( 8, Operation( 2, 1 ) { code:MutableList<Int>, params:List<Int> ->
+            run { code[ params[2] ] = if ( params[0] == params[1] ) 1 else 0; return@Operation null }
+        }),
+        Pair( 99, Operation( 0, 0 ) { _: MutableList<Int>, _: List<Int> ->
+            run { return@Operation -1 }
+        })
     )
 
     private val paramModes:Map<Int,ParamMode> = mapOf(
@@ -45,7 +68,9 @@ class IntcodeComputer( intcode:List<Int>, input:() -> Int, output:(Int) -> Unit)
                 params.add( code[ position++ ] )
             }
 
-            operation.method( code, params )
+            val next = operation.method( code, params )
+            if ( next == -1 ) return code[0]
+            if ( next != null ) position = next
         }
     }
 }
@@ -53,5 +78,5 @@ class IntcodeComputer( intcode:List<Int>, input:() -> Int, output:(Int) -> Unit)
 class UnknownOpcodeException( message:String ) : Exception( message )
 class UnknownParamcodeException( message: String ) : Exception( message )
 
-private class Operation(val readParamCount:Int, val writeParamCount:Int, val method:(MutableList<Int>, List<Int> ) -> Unit )
+private class Operation(val readParamCount:Int, val writeParamCount:Int, val method:(MutableList<Int>, List<Int> ) -> Int? )
 private class ParamMode(val method:(MutableList<Int>, Int ) -> Int )
