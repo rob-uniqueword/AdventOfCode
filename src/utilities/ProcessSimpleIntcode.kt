@@ -1,6 +1,6 @@
 package utilities
 
-fun processIntcode( intcode:List<Int> ) : List<Int>
+fun processSimpleIntcode(intcode:List<Int> ) : List<Int>
 {
     val code = intcode.toMutableList()
     var curr = 0
@@ -17,5 +17,3 @@ fun processIntcode( intcode:List<Int> ) : List<Int>
         curr += 4
     }
 }
-
-class UnknownOpcodeException( message:String ) : Exception( message )

@@ -1,6 +1,6 @@
 import input.readInputFileAsIntcode
 import utilities.UnknownOpcodeException
-import utilities.processIntcode
+import utilities.processSimpleIntcode
 
 fun day2()
 {
@@ -14,7 +14,7 @@ private fun doPart1( inputIntcode:List<Int> )
     val intCode = inputIntcode.toMutableList()
     intCode[1] = 12
     intCode[2] = 2
-    println( processIntcode( intCode ) )
+    println( processSimpleIntcode( intCode ) )
 }
 
 private fun doPart2( inputIntcode: List<Int> )
@@ -29,7 +29,7 @@ private fun doPart2( inputIntcode: List<Int> )
             {
                 intcode[1] = noun
                 intcode[2] = verb
-                val processed = processIntcode( intcode )
+                val processed = processSimpleIntcode( intcode )
                 if ( processed[0] == 19690720 )
                 {
                     println( noun )

@@ -2,6 +2,8 @@
   <dictionary name="Rob">
     <words>
       <w>intcode</w>
+      <w>paramcode</w>
+      <w>paramcodes</w>
     </words>
   </dictionary>
 </component>
