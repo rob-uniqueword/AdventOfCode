@@ -23,3 +23,6 @@ fun readInputFileAsIntegerRange( inputFileName: String ) : IntRange
     val pair = readInputFileAsString( inputFileName ).split( "-" )
     return pair[0].toInt()..pair[1].toInt()
 }
+
+fun readInputFileAsOrbitMap( inputFileName: String ) : List<Pair<String,String>>
+        = readInputFileAsString( inputFileName ).lines().map { l -> Pair( l.substringBefore( ")" ), l.substringAfter( ")" ) ) }
