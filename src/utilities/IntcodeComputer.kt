@@ -1,6 +1,6 @@
 package utilities
 
-class IntcodeComputer( intcode:List<Int>, input:() -> Int, output:(Int) -> Unit)
+class IntcodeComputer( intcode:List<Int>, input:() -> Int, output:(Int) -> Unit )
 {
     private val input = intcode
 
