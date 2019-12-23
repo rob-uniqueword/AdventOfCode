@@ -1,14 +1,14 @@
 package utilities
 
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 
 internal class IntcodeComputerTest {
 
-    val testOutput = mutableListOf<Int>()
-    fun makeTestInputFunction( input:Int ) : () -> Int = { input }
-    fun makeTestOutputFunction( output:MutableList<Int> ) : ( Int ) -> Unit = { out:Int -> output.add( out ) }
+    private fun makeTestInputFunction(input:Int ) : () -> Int = { input }
+    private fun makeTestOutputFunction(output:MutableList<Int> ) : (Int ) -> Unit = { out:Int -> output.add( out ) }
 
     @Test
     fun processTest() {
@@ -42,7 +42,8 @@ internal class IntcodeComputerTest {
     {
         val output = mutableListOf<Int>()
         val computer = IntcodeComputer( inputCode.toIntcode(), makeTestInputFunction( inputVal ), makeTestOutputFunction( output ) )
-        val returnCode = computer.process()
+        val returnCode = computer.start()
+
         if ( expectedReturn != null ) assertEquals( expectedReturn, returnCode )
         if ( expectedOutput != null ) assertEquals( expectedOutput, output )
     }

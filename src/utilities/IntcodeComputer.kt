@@ -1,9 +1,7 @@
 package utilities
 
-class IntcodeComputer( intcode:List<Int>, input:() -> Int, output:(Int) -> Unit )
+class IntcodeComputer( private val intcode:List<Int>, input:() -> Int, output:(Int) -> Unit )
 {
-    private val input = intcode
-
     private val operations:Map<Int,Operation> = mapOf(
         Pair( 1, Operation( 2, 1 ) { code:MutableList<Int>, params:List<Int> ->
             run { code[params[2]] = params[0] + params[1]; return@Operation null }
@@ -39,9 +37,9 @@ class IntcodeComputer( intcode:List<Int>, input:() -> Int, output:(Int) -> Unit 
         Pair( 1, ParamMode { code:MutableList<Int>, pointer:Int -> code[ pointer ] } )
     )
 
-    fun process() : Int
+    fun start() : Int
     {
-        val code = input.toMutableList()
+        val code = intcode.toMutableList()
         var position = 0
 
         while( true )
