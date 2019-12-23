@@ -26,3 +26,6 @@ fun readInputFileAsIntegerRange( inputFileName: String ) : IntRange
 
 fun readInputFileAsOrbitMap( inputFileName: String ) : List<Pair<String,String>>
         = readInputFileAsString( inputFileName ).lines().map { l -> Pair( l.substringBefore( ")" ), l.substringAfter( ")" ) ) }
+
+fun readInputFileAsSpaceImage( inputFileName: String ) : List<Int>
+        = readInputFileAsString( inputFileName ).toCharArray().map { c -> c.toString().toInt() }
