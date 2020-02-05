@@ -9,5 +9,5 @@ fun day9()
     computer.start()
 }
 
-private fun input() = 1.toBigInteger()
+private fun input() = 2.toBigInteger()
 private fun output( out: BigInteger ) = print( "$out, ")
