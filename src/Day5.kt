@@ -1,5 +1,6 @@
 import input.readInputFileAsIntcode
 import utilities.IntcodeComputer
+import java.math.BigInteger
 
 fun day5() {
     val intcode = readInputFileAsIntcode( "day5_input.txt" )
@@ -7,5 +8,5 @@ fun day5() {
     computer.start()
 }
 
-private fun input() = 5
-private fun output( out:Int ) = print( "$out, ")
+private fun input() = 5.toBigInteger()
+private fun output( out:BigInteger ) = print( "$out, ")

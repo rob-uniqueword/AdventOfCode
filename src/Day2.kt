@@ -1,10 +1,10 @@
-import input.readInputFileAsIntcode
+import input.readInputFileAsSimpleIntcode
 import utilities.UnknownOpcodeException
 import utilities.processSimpleIntcode
 
 fun day2()
 {
-    val inputIntcode = readInputFileAsIntcode( "day2_input.txt" )
+    val inputIntcode = readInputFileAsSimpleIntcode( "day2_input.txt" )
     doPart1( inputIntcode )
     doPart2( inputIntcode )
 }

@@ -1,6 +1,6 @@
 package utilities
 
-fun processSimpleIntcode(intcode:List<Int> ) : List<Int>
+fun processSimpleIntcode( intcode:List<Int> ) : List<Int>
 {
     val code = intcode.toMutableList()
     var curr = 0

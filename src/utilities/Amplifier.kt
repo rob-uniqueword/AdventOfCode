@@ -2,18 +2,19 @@ package utilities
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import java.math.BigInteger
 import java.util.concurrent.LinkedBlockingQueue
 
-suspend fun findBestAmplifierPhasePermutation( intCode:List<Int>, phases:List<Int> ) : Int
+suspend fun findBestAmplifierPhasePermutation( intCode:List<BigInteger>, phases:List<BigInteger> ) : BigInteger
 {
-    return phases.permutations().map { p -> amplifySignal( 0, intCode, p ) }.max() ?: 0
+    return phases.permutations().map { p -> amplifySignal( 0.toBigInteger(), intCode, p ) }.max() ?: 0.toBigInteger()
 }
 
-private suspend fun amplifySignal(input:Int, intCode:List<Int>, amplifierPhases:List<Int> ) : Int
+private suspend fun amplifySignal(input:BigInteger, intCode:List<BigInteger>, amplifierPhases:List<BigInteger> ) : BigInteger
 {
     val amplifiers = mutableListOf<Amplifier>()
 
-    for ( phase:Int in amplifierPhases )
+    for ( phase:BigInteger in amplifierPhases )
     {
         val amplifier:Amplifier
 
@@ -34,22 +35,22 @@ private suspend fun amplifySignal(input:Int, intCode:List<Int>, amplifierPhases:
     return outputs.last().await()
 }
 
-private class Amplifier( intCode:List<Int>, phaseSetting:Int, initialInputs:List<Int> = listOf() )
+private class Amplifier( intCode:List<BigInteger>, phaseSetting:BigInteger, initialInputs:List<BigInteger> = listOf() )
 {
-    private var inputQueue = LinkedBlockingQueue<Int>( listOf( phaseSetting ) + initialInputs )
-    private var outputQueue = LinkedBlockingQueue<Int>()
-    private val outputs = mutableListOf<Int>()
+    private var inputQueue = LinkedBlockingQueue<BigInteger>( listOf( phaseSetting ) + initialInputs )
+    private var outputQueue = LinkedBlockingQueue<BigInteger>()
+    private val outputs = mutableListOf<BigInteger>()
 
     private val computer = IntcodeComputer( intCode,
         { inputQueue.take(); },
-        { out:Int -> outputQueue.add( out ); outputs.add( out ) } )
+        { out:BigInteger -> outputQueue.add( out ); outputs.add( out ) } )
 
     fun outputTo( nextAmplifier:Amplifier )
     {
         this.outputQueue = nextAmplifier.inputQueue
     }
 
-    fun run() : Int
+    fun run() : BigInteger
     {
         computer.start()
         return outputs.last()

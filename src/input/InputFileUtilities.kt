@@ -1,5 +1,7 @@
 package input
 
+import java.math.BigInteger
+
 class ResourceFile( fileName:String )
 {
     val fileText = ResourceFile::class.java.getResource( fileName ).readText()
@@ -11,8 +13,11 @@ fun readInputFileAsString( inputFileName: String ) : String
 fun readInputFileAsIntegerList( inputFileName:String ) : List<Int>
         = readInputFileAsString( inputFileName ).lines().map { s -> s.toInt() }
 
-fun readInputFileAsIntcode( inputFileName:String ) : List<Int>
+fun readInputFileAsSimpleIntcode( inputFileName:String ) : List<Int>
         = readInputFileAsString( inputFileName ).split(",").map { s -> s.toInt() }
+
+fun readInputFileAsIntcode( inputFileName:String ) : List<BigInteger>
+        = readInputFileAsString( inputFileName ).split(",").map { s -> s.toBigInteger() }
 
 fun readInputFileAsWirePaths( inputFileName:String ) : List<List<Pair<Char,Int>>>
         = readInputFileAsString( inputFileName ).lines().map { l -> l.split( "," )
