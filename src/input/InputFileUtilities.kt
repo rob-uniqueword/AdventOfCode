@@ -34,3 +34,6 @@ fun readInputFileAsOrbitMap( inputFileName: String ) : List<Pair<String,String>>
 
 fun readInputFileAsSpaceImage( inputFileName: String ) : List<Int>
         = readInputFileAsString( inputFileName ).toCharArray().map { c -> c.toString().toInt() }
+
+fun readInputFileAsCharacterGrid( inputFileName: String ) : List<List<Char>>
+        = readInputFileAsString( inputFileName ).lines().map { l -> l.toList() }
