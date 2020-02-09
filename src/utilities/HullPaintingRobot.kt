@@ -3,6 +3,7 @@ package utilities
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.Math.floorMod
+import java.lang.StringBuilder
 import java.math.BigInteger
 import java.util.*
 import java.util.concurrent.LinkedBlockingQueue
@@ -11,7 +12,7 @@ class HullPaintingRobot( program:List<BigInteger> )
 {
     private var currentSquare = Point(0,0)
     private var currentDirection = CompassDirection.NORTH
-    private val canvas = mutableMapOf( Pair(currentSquare, Colour.BLACK) )
+    private val canvas = mutableMapOf( Pair(currentSquare, Colour.WHITE ) )
 
     private val paintedSquares = mutableSetOf<Point>()
 
@@ -54,16 +55,36 @@ class HullPaintingRobot( program:List<BigInteger> )
 
         return paintedSquares.size
     }
+    
+    fun paintingAsString() : String
+    {
+        val minX = canvas.keys.map { p -> p.x }.min()!!
+        val minY = canvas.keys.map { p -> p.y }.min()!!
+        val maxX = canvas.keys.map { p -> p.x }.max()!!
+        val maxY = canvas.keys.map { p -> p.y }.max()!!
+
+        val builder = StringBuilder()
+
+        for ( y:Int in minY..maxY ) {
+            for ( x:Int in minX..maxX ) {
+                builder.append( canvas.getOrDefault( Point( x, y ), Colour.BLACK ).char )
+            }
+
+            builder.append( System.lineSeparator() )
+        }
+
+        return builder.toString()
+    }
 }
 
-private enum class Colour {
-    BLACK, WHITE
+private enum class Colour( val char:Char ) {
+    BLACK('_'), WHITE('#')
 }
 
 private enum class CompassDirection(val x:Int, val y:Int) {
-    NORTH(0, 1),
-    EAST(1, 0),
-    SOUTH(0,-1),
+    NORTH(0,-1),
+    EAST(1,0),
+    SOUTH(0,1),
     WEST(-1,0)
 }
 

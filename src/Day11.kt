@@ -3,5 +3,8 @@ import utilities.HullPaintingRobot
 
 fun day11() {
     val input = readInputFileAsIntcode( "day11_input.txt")
-    print( HullPaintingRobot(input).run() )
+
+    val robot = HullPaintingRobot( input )
+    println( robot.run() )
+    println( robot.paintingAsString() )
 }
