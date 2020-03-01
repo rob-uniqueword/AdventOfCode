@@ -1,5 +1,6 @@
 package utilities
 
+import input.toSimpleIntcode
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -14,8 +15,6 @@ internal class ProcessSimpleIntcodeKtTest {
         doProcessSimpleIntcodeTest( "1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99" )
     }
 
-    private fun doProcessSimpleIntcodeTest( input:String, expected:String ) = assertEquals( processSimpleIntcode( input.toIntcode() ), expected.toIntcode() )
-
-    private fun String.toIntcode() = this.split( "," ).map { i -> i.toInt() }
+    private fun doProcessSimpleIntcodeTest( input:String, expected:String ) = assertEquals( processSimpleIntcode( input.toSimpleIntcode() ), expected.toSimpleIntcode() )
 
 }

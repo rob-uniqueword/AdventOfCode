@@ -1,11 +1,12 @@
-import input.readInputFileAsIntcode
+import input.readInputFile
+import input.toIntcode
 import kotlinx.coroutines.runBlocking
 
 import utilities.findBestAmplifierPhasePermutation
 
 fun day7()
 {
-    val input = readInputFileAsIntcode( "day7_input.txt" )
+    val input = readInputFile( "day7_input.txt" ).toIntcode()
 
     runBlocking {
         println( findBestAmplifierPhasePermutation( input, listOf( 0, 1, 2, 3, 4 ).map { i -> i.toBigInteger() } ) )

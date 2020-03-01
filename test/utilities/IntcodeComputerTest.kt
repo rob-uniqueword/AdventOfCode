@@ -1,5 +1,6 @@
 package utilities
 
+import input.toIntcode
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -54,7 +55,5 @@ internal class IntcodeComputerTest {
         if ( expectedReturn != null ) assertEquals( expectedReturn, returnCode )
         if ( expectedOutput != null ) assertEquals( expectedOutput, output )
     }
-
-    private fun String.toIntcode() = this.split( "," ).map { i -> i.toBigInteger() }
 
 }

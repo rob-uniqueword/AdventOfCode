@@ -1,9 +1,10 @@
-import input.readInputFileAsCharacterGrid
+import input.readInputFile
+import input.toCharacterGrid
 import utilities.AsteroidMap
 
 fun day10()
 {
-    val input = readInputFileAsCharacterGrid( "day10_input.txt" )
+    val input = readInputFile( "day10_input.txt" ).toCharacterGrid()
 
     val map = AsteroidMap( input )
 

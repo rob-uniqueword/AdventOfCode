@@ -1,8 +1,9 @@
-import input.readInputFileAsWirePaths
+import input.readInputFile
+import input.toWirePaths
 import utilities.calculateWirePoints
 
 fun day3() {
-    val paths = readInputFileAsWirePaths( "day3_input.txt" )
+    val paths = readInputFile( "day3_input.txt" ).toWirePaths()
 
     val line1 = calculateWirePoints( paths[0] )
     val line2 = calculateWirePoints( paths[1] )

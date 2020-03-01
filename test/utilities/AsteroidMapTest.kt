@@ -1,5 +1,6 @@
 package utilities
 
+import input.toCharacterGrid
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -129,6 +130,4 @@ internal class AsteroidMapTest {
         assertEquals(expectedAsteroid, result?.first)
         assertEquals(expectedCount, result?.second)
     }
-
-    private fun String.toCharacterGrid() = this.lines().map { l -> l.toList() }
 }

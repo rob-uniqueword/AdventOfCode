@@ -1,8 +1,9 @@
-import input.readInputFileAsIntcode
+import input.readInputFile
+import input.toIntcode
 import utilities.HullPaintingRobot
 
 fun day11() {
-    val input = readInputFileAsIntcode( "day11_input.txt")
+    val input = readInputFile( "day11_input.txt").toIntcode()
 
     val robot = HullPaintingRobot( input )
     println( robot.run() )

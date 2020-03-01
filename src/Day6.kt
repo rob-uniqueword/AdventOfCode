@@ -1,9 +1,10 @@
-import input.readInputFileAsOrbitMap
+import input.readInputFile
+import input.toOrbitMap
 import utilities.OrbitMap
 
 fun day6()
 {
-    val input = readInputFileAsOrbitMap( "day6_input.txt" )
+    val input = readInputFile( "day6_input.txt" ).toOrbitMap()
 
     val orbitMap = OrbitMap( input )
 
