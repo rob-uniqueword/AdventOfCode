@@ -18,3 +18,8 @@ fun String.toIntegerRange() = run {
 fun String.toOrbitMap() = this.lines().map { l -> Pair( l.substringBefore( ")" ), l.substringAfter( ")" ) ) }
 fun String.toSpaceImage() = this.toCharArray().map { c -> c.toString().toInt() }
 fun String.toCharacterGrid() = this.lines().map { l -> l.toList() }
+fun String.toPoints() = Regex( "<x=([-0-9]*), y=([-0-9]*), z=([-0-9]*)>" )
+    .findAll( this ).toList()
+    .map { Point3D( it.groupValues[1].toInt(), it.groupValues[2].toInt(), it.groupValues[3].toInt() ) }
+
+class Point3D( var x:Int, var y:Int, var z:Int )
